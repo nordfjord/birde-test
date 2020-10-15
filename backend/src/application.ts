@@ -5,9 +5,16 @@ import cors from 'cors'
 
 const app = express()
 
-app.use(cors({ origin: 'http://localhost:3000' }))
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors({ origin: 'http://localhost:3000' }))
+}
 
-app.use(pingController)
-app.use(dataController)
+const apiRouter = express.Router()
+
+apiRouter.use(pingController)
+apiRouter.use(dataController)
+
+app.use('/api', apiRouter)
+app.use(express.static('./frontend'))
 
 export default app

@@ -8,7 +8,7 @@
     ],
     "esModuleInterop": true,
     "target": "esnext",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "removeComments": true,
     "inlineSourceMap": true,
     "inlineSources": true,
