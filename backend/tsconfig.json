@@ -6,7 +6,8 @@
     "lib": [
       "esnext"
     ],
-    "target": "es2015",
+    "esModuleInterop": true,
+    "target": "esnext",
     "outDir": "./lib",
     "removeComments": true,
     "inlineSourceMap": true,

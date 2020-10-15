@@ -1,63 +1,47 @@
-import * as React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import { RootState } from '@App/store/reducers';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-
-import Title from '@App/components/Title';
-import Logo from '@App/components/Logo';
-import SubTitle from '@App/components/SubTitle';
-
-const LogoUrl = require('../../assets/images/logo-birdie.svg');
-
-interface AppProps {
-
-}
-
-interface AppState {
-
-}
+import React, { useState } from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
+import { PatientSelector } from '../PatientSelector'
+import Mood from '../WeekdayMood'
 
 const GlobalStyle = createGlobalStyle`
   body {
-    height: 100vh;
+    min-height: 100vh;
     background-color: #F9F9F9;
-    > div {
-      height: 100%;
-    }
+    /* system font stack */
+    font-family: -apple-system, 
+                 BlinkMacSystemFont,
+                 "Segoe UI",
+                 Helvetica,
+                 Arial,
+                 sans-serif,
+                 "Apple Color Emoji",
+                 "Segoe UI Emoji",
+                 "Segoe UI Symbol";
   }
-`;
+  * {
+    box-sizing: border-box;
+  }
+`
 
 const AppContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
+`
 
-class App extends React.Component<AppProps, AppState> {
-  public constructor(props: AppProps) {
-    super(props);
-  }
-
-  public render() {
-    return (
-      <>
-        <GlobalStyle />
-        <AppContainer>
-          <Logo src={LogoUrl} />
-          <Title>Welcome to the birdie test</Title>
-          <SubTitle>Best of luck!</SubTitle>
-        </AppContainer>
-      </>
-    );
-  }
+function App() {
+  const [selectedPatient, setSelectedPatient] = useState<string>('')
+  return (
+    <>
+      <GlobalStyle />
+      <AppContainer>
+        <PatientSelector onChangePatient={setSelectedPatient} />
+        <Mood patient={selectedPatient} />
+      </AppContainer>
+    </>
+  )
 }
 
-const mapStateToProps = (state: RootState, ownProps: object) => {};
-
-const mapDispatchToProps = (dispatch: Dispatch<RootState>) => {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App

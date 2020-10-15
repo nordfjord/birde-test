@@ -1,8 +1,13 @@
-import * as express from "express";
-import {pingController} from "./controllers/ping";
+import express from 'express'
+import { dataController } from './controllers/data'
+import { pingController } from './controllers/ping'
+import cors from 'cors'
 
-const app = express();
+const app = express()
 
-app.use(pingController);
+app.use(cors({ origin: 'http://localhost:3000' }))
 
-export default app;
+app.use(pingController)
+app.use(dataController)
+
+export default app
